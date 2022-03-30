@@ -4,6 +4,7 @@
 	export let noTrailingSlash = false;
 	/** Set to `true` to display skeleton state */
 	export let skeleton = false;
+	/** BreadcrumbItems to display */
 	export let items: BreadcrumbItem[] = [];
 	import { Breadcrumb, BreadcrumbItem } from "carbon-components-svelte";
 </script>

@@ -4,7 +4,7 @@ declare const __propDef: {
     props: {
         /** Set to `true` to hide the breadcrumb trailing slash */ noTrailingSlash?: boolean;
         /** Set to `true` to display skeleton state */ skeleton?: boolean;
-        items?: BreadcrumbItem[];
+        /** BreadcrumbItems to display */ items?: BreadcrumbItem[];
     };
     events: {
         [evt: string]: CustomEvent<any>;
