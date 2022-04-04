@@ -25,7 +25,7 @@ const Breadcrumb = create_ssr_component(($$result, $$props, $$bindings, slots) =
   if ($$props.skeleton === void 0 && $$bindings.skeleton && skeleton !== void 0)
     $$bindings.skeleton(skeleton);
   return `
-${skeleton ? `${validate_component(BreadcrumbSkeleton, "BreadcrumbSkeleton").$$render($$result, Object.assign({ noTrailingSlash }, $$restProps), {}, {})}` : `<nav${spread([{ "aria-label": "Breadcrumb" }, escape_object($$restProps)], {})}><ol${add_classes(("bx--breadcrumb " + (noTrailingSlash ? "bx--breadcrumb--no-trailing-slash" : "")).trim())}>${slots.default ? slots.default({}) : ``}</ol></nav>`}`;
+${skeleton ? `${validate_component(BreadcrumbSkeleton, "BreadcrumbSkeleton").$$render($$result, Object.assign({ noTrailingSlash }, $$restProps), {}, {})}` : `<nav${spread([{ "aria-label": "Breadcrumb" }, escape_object($$restProps)], {})}><ol${add_classes(("bx--breadcrumb " + (noTrailingSlash ? "bx--breadcrumb--no-trailing-slash" : "")).trim())}><slot></slot></ol></nav>`}`;
 });
 const Link = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$restProps = compute_rest_props($$props, ["size", "href", "inline", "icon", "disabled", "visited", "ref"]);
@@ -54,10 +54,8 @@ const Link = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `
 ${disabled ? `<p${spread([escape_object($$restProps)], {
     classes: "bx--link " + (disabled ? "bx--link--disabled" : "") + " " + (inline ? "bx--link--inline" : "") + " " + (visited ? "bx--link--visited" : "")
-  })}${add_attribute("this", ref, 0)}>${slots.default ? slots.default({}) : ``}
-    ${!inline && ($$slots.icon || icon) ? `<div${add_classes("bx--link__icon".trim())}>${slots.icon ? slots.icon({}) : `
-          ${validate_component(icon || missing_component, "svelte:component").$$render($$result, {}, {}, {})}
-        `}</div>` : ``}</p>` : `<a${spread([
+  })}${add_attribute("this", ref, 0)}><slot></slot>
+    ${!inline && ($$slots.icon || icon) ? `<div${add_classes("bx--link__icon".trim())}><slot name="${"icon"}">${validate_component(icon || missing_component, "svelte:component").$$render($$result, {}, {}, {})}</slot></div>` : ``}</p>` : `<a${spread([
     {
       rel: escape_attribute_value($$restProps.target === "_blank" ? "noopener noreferrer" : void 0)
     },
@@ -65,10 +63,8 @@ ${disabled ? `<p${spread([escape_object($$restProps)], {
     escape_object($$restProps)
   ], {
     classes: "bx--link " + (disabled ? "bx--link--disabled" : "") + " " + (inline ? "bx--link--inline" : "") + " " + (visited ? "bx--link--visited" : "") + " " + (size === "sm" ? "bx--link--sm" : "") + " " + (size === "lg" ? "bx--link--lg" : "")
-  })}${add_attribute("this", ref, 0)}>${slots.default ? slots.default({}) : ``}
-    ${!inline && ($$slots.icon || icon) ? `<div${add_classes("bx--link__icon".trim())}>${slots.icon ? slots.icon({}) : `
-          ${validate_component(icon || missing_component, "svelte:component").$$render($$result, {}, {}, {})}
-        `}</div>` : ``}</a>`}`;
+  })}${add_attribute("this", ref, 0)}><slot></slot>
+    ${!inline && ($$slots.icon || icon) ? `<div${add_classes("bx--link__icon".trim())}><slot name="${"icon"}">${validate_component(icon || missing_component, "svelte:component").$$render($$result, {}, {}, {})}</slot></div>` : ``}</a>`}`;
 });
 const BreadcrumbItem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$restProps = compute_rest_props($$props, ["href", "isCurrentPage"]);
@@ -87,19 +83,12 @@ const BreadcrumbItem = create_ssr_component(($$result, $$props, $$bindings, slot
     "aria-current": $$restProps["aria-current"]
   }, {}, {
     default: () => {
-      return `${slots.default ? slots.default({
-        props: {
-          "aria-current": $$restProps["aria-current"],
-          class: "bx--link"
-        }
-      }) : ``}`;
+      return `<slot></slot>`;
     }
-  })}` : `${slots.default ? slots.default({
-    props: {
-      "aria-current": $$restProps["aria-current"],
-      class: "bx--link"
-    }
-  }) : ``}`}</li>`;
+  })}` : `<slot${add_attribute("props", {
+    "aria-current": $$restProps["aria-current"],
+    class: "bx--link"
+  }, 0)}></slot>`}</li>`;
 });
 Object.freeze({
   sm: 320,
@@ -2189,11 +2178,6 @@ Date.prototype.fp_incr = function(days) {
 if (typeof window !== "undefined") {
   window.flatpickr = flatpickr;
 }
-var HeaderAction_svelte_svelte_type_style_lang = "";
-var HeaderActionLink_svelte_svelte_type_style_lang = "";
-var HeaderActionSearch_svelte_svelte_type_style_lang = "";
-var HeaderPanelDivider_svelte_svelte_type_style_lang = "";
-var HeaderSearch_svelte_svelte_type_style_lang = "";
 const FluxBreadcrumb_wc = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { noTrailingSlash = false } = $$props;
   let { skeleton = false } = $$props;
@@ -2222,11 +2206,6 @@ ${validate_component(Breadcrumb, "Breadcrumb").$$render($$result, { noTrailingSl
     }
   })}`;
 });
-var index_svelte_svelte_type_style_lang = "";
-const css = {
-  code: "main.svelte-1tky8bj{text-align:center;padding:1em;max-width:240px;margin:0 auto}@media(min-width: 640px){main.svelte-1tky8bj{max-width:none}}",
-  map: null
-};
 const Routes = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { items = [] } = $$props;
   let item1 = {};
@@ -2243,8 +2222,7 @@ const Routes = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   items.push(item2);
   if ($$props.items === void 0 && $$bindings.items && items !== void 0)
     $$bindings.items(items);
-  $$result.css.add(css);
-  return `<main class="${"svelte-1tky8bj"}">${validate_component(FluxBreadcrumb_wc, "FluxBreadcrumb").$$render($$result, {
+  return `<main>${validate_component(FluxBreadcrumb_wc, "FluxBreadcrumb").$$render($$result, {
     noTrailingSlash: true,
     skeleton: false,
     items
